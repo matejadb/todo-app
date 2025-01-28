@@ -45,10 +45,6 @@ input:focus {
 	border-color: #ff5722;
 }
 
-input[type='radio'] {
-	background-color: #1e1e1e;
-}
-
 label {
 	margin: 5px 0;
 }
@@ -82,21 +78,10 @@ h1 a {
 	background-color: rgba(0, 0, 0, 0.7);
 }
 
-/* #add-task {
-	
-	height: 300px;
-	width: 500px;
-	
-	
-	-webkit-box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.44);
-	box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.44);
-	background-color: #1e1e1e;
-} */
-
 #add-task {
 	margin: 10% auto;
 	border-radius: 20px;
-	height: 500px;
+	height: 450px;
 	width: 300px;
 	background-color: #1e1e1e;
 	color: #ededed;
@@ -130,6 +115,11 @@ h1 a {
 	align-self: flex-end;
 }
 
+input[type='radio'] {
+	margin-top: 10px;
+	background-color: #1e1e1e;
+}
+
 .dialog-container input[type='submit'] {
 	background-color: #ff5722;
 	color: #ededed;
@@ -137,10 +127,10 @@ h1 a {
 	padding: 10px 20px;
 	border-radius: 8px;
 	cursor: pointer;
+	margin-top: 30%;
 }
 
 .dialog-container input[type='submit']:hover {
-	cursor: pointer;
 	background-color: #e64a19;
 }
 
