@@ -7,8 +7,50 @@
 	box-sizing: border-box;
 }
 
+body {
+	background-color: #1e1e1e;
+	color: #ededed;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
 li {
 	list-style: none;
+}
+
+button {
+	background-color: #ff5722;
+	color: #ededed;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+button:hover {
+	background-color: #e64a19;
+}
+
+input,
+label {
+	color: #ededed;
+	background-color: #1e1e1e;
+	border: 1px solid #272727;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+input:focus {
+	outline: none;
+	border-color: #ff5722;
+}
+
+input[type='radio'] {
+	background-color: #1e1e1e;
+}
+
+label {
+	margin: 5px 0;
 }
 
 .prevent-select {
@@ -17,34 +59,48 @@ li {
 	user-select: none;
 }
 
+/*================================================*/
+/* Nav Section */
+/*================================================*/
 nav {
 	display: flex;
 	justify-content: space-between;
 	padding: 20px;
+	background-color: #1e1e1e;
+	border-bottom: 1px solid #272727;
 }
 
-main {
-	display: grid;
-	grid-template-columns: 200px 1fr;
+h1 a {
+	color: #ff5722;
+	text-decoration: none;
 }
 
 /*================================================*/
 /* Dialog window */
 /*================================================*/
 ::backdrop {
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-	opacity: 0.75;
+	background-color: rgba(0, 0, 0, 0.7);
 }
+
+/* #add-task {
+	
+	height: 300px;
+	width: 500px;
+	
+	
+	-webkit-box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.44);
+	box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.44);
+	background-color: #1e1e1e;
+} */
 
 #add-task {
 	margin: 10% auto;
-	height: 300px;
-	width: 500px;
-	border: none;
 	border-radius: 20px;
-	-webkit-box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.44);
-	box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.44);
+	height: 500px;
+	width: 300px;
+	background-color: #1e1e1e;
+	color: #ededed;
+	border: 1px solid #272727;
 }
 
 .close,
@@ -53,14 +109,6 @@ main {
 	float: right;
 	font-size: 28px;
 	font-weight: bold;
-}
-
-.close:hover,
-.close:focus,
-.close-modal:hover,
-.close-modal:focus {
-	color: black;
-	text-decoration: none;
 	cursor: pointer;
 }
 
@@ -83,12 +131,26 @@ main {
 }
 
 .dialog-container input[type='submit'] {
-	padding: 5px;
-	margin-top: 30px;
+	background-color: #ff5722;
+	color: #ededed;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 8px;
+	cursor: pointer;
 }
 
 .dialog-container input[type='submit']:hover {
 	cursor: pointer;
+	background-color: #e64a19;
+}
+
+/*================================================*/
+/* Main Section */
+/*================================================*/
+
+main {
+	display: grid;
+	grid-template-columns: 200px 1fr;
 }
 
 /*================================================*/
@@ -97,7 +159,22 @@ main {
 
 .project-container,
 .task-container {
-	padding-left: 20px;
+	background-color: #1e1e1e;
+	border: 1px solid #272727;
+	padding: 20px;
+	border-radius: 10px;
+}
+
+.project-item {
+	color: #ededed;
+	padding: 10px;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+}
+
+.project-item:hover {
+	background-color: #272727;
+	cursor: pointer;
 }
 
 .project-item:hover {
@@ -116,19 +193,30 @@ main {
 }
 
 .task-item {
-	background-color: red;
-	padding: 10px;
-	border-radius: 25px;
+	background-color: #1e1e1e;
+	padding: 15px;
+	border-radius: 15px;
 	width: 60%;
+	border: 1px solid #272727;
+	transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .task-item:hover {
+	transform: scale(1.03);
+	background-color: #272727;
 	cursor: pointer;
-	-moz-transform: scale(1.01);
-	-webkit-transform: scale(1.01);
-	-o-transform: scale(1.01);
-	-ms-transform: scale(1.01);
-	transform: scale(1.01);
+}
+
+.task-item.low {
+	border-left: 5px solid #4caf50;
+}
+
+.task-item.medium {
+	border-left: 5px solid #ffc107;
+}
+
+.task-item.high {
+	border-left: 5px solid #f44336;
 }
 
 /*================================================*/
@@ -143,8 +231,8 @@ main {
 	width: 100%;
 	height: 100%;
 	overflow: auto;
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	background-color: rgba(0, 0, 0, 0.8);
+	color: #ededed;
 }
 
 .information-container {
@@ -159,6 +247,8 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	background-color: #1e1e1e;
+	color: #ededed;
 }
 
 .information-container span {

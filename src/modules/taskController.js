@@ -48,6 +48,18 @@ export function taskController() {
 			dueDate.classList.add('prevent-select');
 			taskItem.appendChild(dueDate);
 
+			switch (document.querySelector('input[name="priority"]:checked').value) {
+				case 'Low':
+					taskItem.classList.add('low');
+					break;
+				case 'Medium':
+					taskItem.classList.add('medium');
+					break;
+				case 'High':
+					taskItem.classList.add('high');
+					break;
+			}
+
 			taskList.appendChild(taskItem);
 
 			taskForm.reset();
