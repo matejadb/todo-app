@@ -15,7 +15,17 @@ main {
 	grid-template-columns: 200px 1fr;
 }
 
+.prevent-select {
+	-webkit-user-select: none; /* Safari */
+	-ms-user-select: none; /* IE 10 and IE 11 */
+	user-select: none; /* Standard syntax */
+}
+
 .project-container,
 .task-container {
 	padding-left: 20px;
+}
+
+#default-project:hover {
+	cursor: pointer;
 }
