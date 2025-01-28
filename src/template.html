@@ -9,17 +9,38 @@
 		<header>
 			<nav>
 				<h1><a href="">Sveki Todo</a></h1>
-				<button>Add task</button>
+				<dialog id="add-task">
+					<span class="close">&times;</span>
+					<form id="task-form">
+						<label for="title">Title:</label>
+						<input type="text" id="title" name="title" />
+
+						<label for="description">Description:</label>
+						<input type="text" id="description" name="description" />
+
+						<label for="due-date">Due Date:</label>
+						<input type="date" name="due-date" id="due-date" />
+
+						<p>Priority:</p>
+						<input type="radio" id="low" name="priority" value="Low" />
+						<label for="low">Low</label>
+						<input type="radio" id="medium" name="priority" value="Medium" />
+						<label for="medium">Medium</label>
+						<input type="radio" id="high" name="priority" value="High" />
+						<label for="high">High</label>
+
+						<input type="submit" value="Submit" class="submit-task" />
+					</form>
+				</dialog>
+				<button class="task-window">Add task</button>
 			</nav>
 		</header>
 
 		<main>
 			<div class="project-container">
-				<h3 id="default-project" class="prevent-select">All tasks</h3>
+				<h2>Projects</h2>
 				<ul class="project-list prevent-select">
-					<li class="project-item">Test1</li>
-					<li class="project-item">Test2</li>
-					<li class="project-item">Test3</li>
+					<li id="default-project" class="project-item">All Tasks</li>
 				</ul>
 				<button>Add project</button>
 			</div>
