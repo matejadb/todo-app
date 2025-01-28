@@ -26,8 +26,17 @@ export function taskController() {
 		confirmButton.addEventListener('click', function (e) {
 			e.preventDefault();
 
+			const newTask = new Task(
+				document.getElementById('title').value,
+				document.getElementById('description').value,
+				document.getElementById('due-date').value,
+				document.querySelector('input[name="priority"]:checked').value
+			);
+			Task.tasks.push(newTask);
+
 			const taskItem = document.createElement('li');
 			taskItem.classList.add('task-item');
+			taskItem.dataset.index = Task.tasks.length - 1;
 
 			const title = document.createElement('h1');
 			title.textContent = document.getElementById('title').value;
@@ -39,14 +48,6 @@ export function taskController() {
 
 			taskList.appendChild(taskItem);
 
-			const newTask = new Task(
-				document.getElementById('title').value,
-				document.getElementById('description').value,
-				document.getElementById('due-date').value,
-				document.querySelector('input[name="priority"]:checked').value
-			);
-
-			Task.tasks.push(newTask);
 			taskForm.reset();
 			taskDialog.close();
 		});
