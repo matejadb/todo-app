@@ -58,10 +58,11 @@ export function taskController() {
 	const openTask = () => {
 		taskList.addEventListener('click', function (e) {
 			const taskToOpen = e.target.closest('.task-item');
-			const taskIndex = taskToOpen.dataset.index;
-			let task = Task.tasks[taskIndex];
-
-			console.log(task.title, task.description, task.dueDate, task.priority);
+			if (taskToOpen) {
+				const taskIndex = taskToOpen.dataset.index;
+				let task = Task.tasks[taskIndex];
+				console.log(task.title, task.description, task.dueDate, task.priority);
+			}
 		});
 	};
 
