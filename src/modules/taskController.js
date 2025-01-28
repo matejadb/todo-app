@@ -66,19 +66,19 @@ export function taskController() {
 				let task = Task.tasks[taskIndex];
 
 				const title = document.createElement('h1');
-				title.textContent = task.title;
+				title.textContent = `${task.title}`;
 				taskContent.appendChild(title);
 
 				const description = document.createElement('p');
-				description.textContent = task.description;
+				description.textContent = `Description: ${task.description}`;
 				taskContent.appendChild(description);
 
 				const dueDate = document.createElement('p');
-				dueDate.textContent = task.dueDate;
+				dueDate.textContent = `Due: ${task.dueDate}`;
 				taskContent.appendChild(dueDate);
 
 				const priority = document.createElement('p');
-				priority.textContent = task.priority;
+				priority.textContent = `Priority: ${task.priority}`;
 				taskContent.appendChild(priority);
 
 				modal.style.display = 'block';

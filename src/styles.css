@@ -32,7 +32,8 @@ main {
 /* Dialog window */
 /*================================================*/
 ::backdrop {
-	background-color: #cccaca;
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 	opacity: 0.75;
 }
 
@@ -146,10 +147,21 @@ main {
 	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
-.task-content {
+.information-container {
 	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 80%; /* Could be more or less, depending on screen size */
+	margin: 10% auto;
+	height: 300px;
+	width: 500px;
+	border: none;
+	border-radius: 20px;
+	-webkit-box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.44);
+	box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.44);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.information-container span {
+	align-self: flex-end;
+	margin-right: 5px;
 }
