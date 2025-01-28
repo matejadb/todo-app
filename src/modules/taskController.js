@@ -14,6 +14,8 @@ export function taskController() {
 		closeButton.addEventListener('click', function () {
 			taskDialog.close();
 		});
+
+		makeTask();
 	};
 
 	const makeTask = () => {
@@ -31,9 +33,9 @@ export function taskController() {
 			title.textContent = document.getElementById('title').value;
 			taskItem.appendChild(title);
 
-			const description = document.createElement('p');
-			description.textContent = document.getElementById('description').value;
-			taskItem.appendChild(description);
+			const dueDate = document.createElement('p');
+			dueDate.textContent = document.getElementById('due-date').value;
+			taskItem.appendChild(dueDate);
 
 			taskList.appendChild(taskItem);
 
@@ -52,6 +54,5 @@ export function taskController() {
 
 	return {
 		showAddTaskWindow,
-		makeTask,
 	};
 }
