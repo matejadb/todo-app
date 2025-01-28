@@ -87,6 +87,13 @@ export function taskController() {
 					modal.style.display = 'none';
 					taskContent.textContent = '';
 				});
+
+				window.addEventListener('click', function (e) {
+					if (e.target === modal) {
+						modal.style.display = 'none';
+						taskContent.textContent = '';
+					}
+				});
 			}
 		});
 	};
