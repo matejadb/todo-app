@@ -56,12 +56,37 @@ export function taskController() {
 	};
 
 	const openTask = () => {
+		const modal = document.getElementById('information');
+		const close = document.querySelector('.close-modal');
+		const taskContent = document.querySelector('.task-content');
 		taskList.addEventListener('click', function (e) {
 			const taskToOpen = e.target.closest('.task-item');
 			if (taskToOpen) {
 				const taskIndex = taskToOpen.dataset.index;
 				let task = Task.tasks[taskIndex];
-				console.log(task.title, task.description, task.dueDate, task.priority);
+
+				const title = document.createElement('h1');
+				title.textContent = task.title;
+				taskContent.appendChild(title);
+
+				const description = document.createElement('p');
+				description.textContent = task.description;
+				taskContent.appendChild(description);
+
+				const dueDate = document.createElement('p');
+				dueDate.textContent = task.dueDate;
+				taskContent.appendChild(dueDate);
+
+				const priority = document.createElement('p');
+				priority.textContent = task.priority;
+				taskContent.appendChild(priority);
+
+				modal.style.display = 'block';
+
+				close.addEventListener('click', function () {
+					modal.style.display = 'none';
+					taskContent.textContent = '';
+				});
 			}
 		});
 	};
