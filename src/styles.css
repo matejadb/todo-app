@@ -15,10 +15,22 @@ main {
 	grid-template-columns: 200px 1fr;
 }
 
-.prevent-select {
-	-webkit-user-select: none; /* Safari */
-	-ms-user-select: none; /* IE 10 and IE 11 */
-	user-select: none; /* Standard syntax */
+/*================================================*/
+/* Dialog window */
+/*================================================*/
+::backdrop {
+	background-color: #cccaca;
+	opacity: 0.75;
+}
+
+#add-task {
+	margin: 30% auto;
+	height: 300px;
+	width: 500px;
+	border: none;
+	border-radius: 20px;
+	-webkit-box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.44);
+	box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.44);
 }
 
 .close {
@@ -33,6 +45,39 @@ main {
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+.dialog-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.dialog-container div {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 10px;
+}
+
+.dialog-container span {
+	margin-right: 5px;
+	align-self: flex-end;
+}
+
+.dialog-container input[type='submit'] {
+	padding: 5px;
+	margin-top: 30px;
+}
+
+.dialog-container input[type='submit']:hover {
+	cursor: pointer;
+}
+
+.prevent-select {
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .project-container,
