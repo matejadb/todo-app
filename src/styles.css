@@ -7,6 +7,10 @@
 	box-sizing: border-box;
 }
 
+li {
+	list-style: none;
+}
+
 .prevent-select {
 	-webkit-user-select: none;
 	-ms-user-select: none;
@@ -33,7 +37,7 @@ main {
 }
 
 #add-task {
-	margin: 30% auto;
+	margin: 10% auto;
 	height: 300px;
 	width: 500px;
 	border: none;
@@ -99,3 +103,26 @@ main {
 /*================================================*/
 /* Task Container */
 /*================================================*/
+.task-list {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+
+.task-item {
+	background-color: red;
+	padding: 10px;
+	border-radius: 25px;
+	width: 60%;
+}
+
+.task-item:hover {
+	cursor: pointer;
+	-moz-transform: scale(1.01);
+	-webkit-transform: scale(1.01);
+	-o-transform: scale(1.01);
+	-ms-transform: scale(1.01);
+	transform: scale(1.01);
+}

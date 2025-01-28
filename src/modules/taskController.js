@@ -2,6 +2,7 @@ import { Task } from './task';
 
 export function taskController() {
 	const taskDialog = document.getElementById('add-task');
+	const taskList = document.querySelector('.task-list');
 
 	const showAddTaskWindow = () => {
 		const showButton = document.querySelector('.task-window');
@@ -20,7 +21,6 @@ export function taskController() {
 
 	const makeTask = () => {
 		const confirmButton = document.querySelector('.submit-task');
-		const taskList = document.querySelector('.task-list');
 		const taskForm = document.getElementById('task-form');
 
 		confirmButton.addEventListener('click', function (e) {
@@ -39,11 +39,13 @@ export function taskController() {
 			taskItem.dataset.index = Task.tasks.length - 1;
 
 			const title = document.createElement('h1');
+			title.classList.add('prevent-select');
 			title.textContent = document.getElementById('title').value;
 			taskItem.appendChild(title);
 
 			const dueDate = document.createElement('p');
 			dueDate.textContent = document.getElementById('due-date').value;
+			dueDate.classList.add('prevent-select');
 			taskItem.appendChild(dueDate);
 
 			taskList.appendChild(taskItem);
@@ -53,7 +55,18 @@ export function taskController() {
 		});
 	};
 
+	const openTask = () => {
+		taskList.addEventListener('click', function (e) {
+			const taskToOpen = e.target.closest('.task-item');
+			const taskIndex = taskToOpen.dataset.index;
+			let task = Task.tasks[taskIndex];
+
+			console.log(task.title, task.description, task.dueDate, task.priority);
+		});
+	};
+
 	return {
 		showAddTaskWindow,
+		openTask,
 	};
 }

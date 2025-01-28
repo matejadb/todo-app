@@ -36,4 +36,5 @@ export function screenController() {
 	const controller = taskController();
 
 	controller.showAddTaskWindow();
+	controller.openTask();
 }
