@@ -134,6 +134,11 @@ input[type='radio'] {
 	background-color: #1e1e1e;
 }
 
+input[type='radio']:checked {
+	filter: invert(41%) sepia(62%) saturate(2688%) hue-rotate(346deg)
+		brightness(103%) contrast(102%);
+}
+
 .dialog-container input[type='submit'] {
 	background-color: #ff5722;
 	color: #ededed;
