@@ -115,7 +115,10 @@ export function taskController() {
 	};
 
 	function printTaskInfo(e) {
-		if (e.target.classList.contains('task-item')) {
+		if (
+			e.target.classList.contains('task-item') ||
+			e.target.classList.contains('prevent-select')
+		) {
 			const taskToOpen = e.target.closest('.task-item');
 
 			if (!taskToOpen) return;
