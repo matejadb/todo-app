@@ -2,9 +2,9 @@
 // Imports
 //===========================================================
 import { Task } from './task';
+import { format } from 'date-fns';
 import checkIcon from '../icons/check.svg';
 import trashIcon from '../icons/trash.svg';
-import { format } from 'date-fns';
 
 export function taskController() {
 	//===========================================================
