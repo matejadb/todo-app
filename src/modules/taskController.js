@@ -1,7 +1,10 @@
+//===========================================================
+// Imports
+//===========================================================
 import { Task } from './task';
-
 import checkIcon from '../icons/check.svg';
 import trashIcon from '../icons/trash.svg';
+import { format } from 'date-fns';
 
 export function taskController() {
 	//===========================================================
@@ -20,7 +23,10 @@ export function taskController() {
 		title.textContent = document.getElementById('title').value;
 
 		const dueDate = document.createElement('p');
-		dueDate.textContent = document.getElementById('due-date').value;
+		dueDate.textContent = format(
+			Date.parse(document.getElementById('due-date').value),
+			'dd.MM.yyyy'
+		);
 		dueDate.classList.add('prevent-select');
 
 		switch (priority) {
@@ -124,7 +130,11 @@ export function taskController() {
 			description.textContent = `Description: ${task.description}`;
 
 			const dueDate = document.createElement('p');
-			dueDate.textContent = `Due: ${task.dueDate}`;
+
+			dueDate.textContent = dueDate.textContent = `Due: ${format(
+				Date.parse(task.dueDate),
+				'dd.MM.yyyy'
+			)}`;
 
 			const priority = document.createElement('p');
 			priority.textContent = `Priority: ${task.priority}`;
