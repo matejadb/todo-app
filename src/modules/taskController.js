@@ -39,7 +39,7 @@ export function taskController() {
 
 		const iconDiv = document.createElement('div');
 		iconDiv.classList.add('icons');
-		
+
 		const check = document.createElement('img');
 		check.classList.add('check-icon');
 		check.src = checkIcon;
@@ -98,28 +98,40 @@ export function taskController() {
 	};
 
 	function printTaskInfo(e) {
-		const taskToOpen = e.target.closest('.task-item');
+		if (e.target.classList.contains('task-item')) {
+			const taskToOpen = e.target.closest('.task-item');
 
-		if (!taskToOpen) return;
+			if (!taskToOpen) return;
 
-		const taskIndex = taskToOpen.dataset.index;
-		let task = Task.tasks[taskIndex];
+			const taskIndex = taskToOpen.dataset.index;
+			let task = Task.tasks[taskIndex];
 
-		const title = document.createElement('h1');
-		title.textContent = `${task.title}`;
+			const title = document.createElement('h1');
+			title.textContent = `${task.title}`;
 
-		const description = document.createElement('p');
-		description.textContent = `Description: ${task.description}`;
+			const description = document.createElement('p');
+			description.textContent = `Description: ${task.description}`;
 
-		const dueDate = document.createElement('p');
-		dueDate.textContent = `Due: ${task.dueDate}`;
+			const dueDate = document.createElement('p');
+			dueDate.textContent = `Due: ${task.dueDate}`;
 
-		const priority = document.createElement('p');
-		priority.textContent = `Priority: ${task.priority}`;
+			const priority = document.createElement('p');
+			priority.textContent = `Priority: ${task.priority}`;
 
-		taskContent.append(title, description, dueDate, priority);
+			taskContent.append(title, description, dueDate, priority);
 
-		showInfoCard();
+			showInfoCard();
+		}
+	}
+
+	// Task Completion
+	function markComplete(e) {
+		if (e.target.classList.contains('check-icon')) {
+			const completedTask = e.target.closest('.task-item');
+			const taskIndex = completedTask.dataset.index;
+			Task.tasks[taskIndex].markComplete();
+			completedTask.classList.toggle('completed');
+		}
 	}
 
 	//===========================================================
@@ -153,8 +165,13 @@ export function taskController() {
 		taskList.addEventListener('click', printTaskInfo);
 	};
 
+	const completeTask = () => {
+		taskList.addEventListener('click', markComplete);
+	};
+
 	return {
 		taskSetupDialog,
 		openTask,
+		completeTask,
 	};
 }

@@ -8,4 +8,8 @@ export class Task {
 		this.priority = priority;
 		this.isCompleted = isCompleted;
 	}
+
+	markComplete() {
+		this.isCompleted = !this.isCompleted;
+	}
 }

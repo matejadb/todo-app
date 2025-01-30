@@ -37,4 +37,5 @@ export function screenController() {
 
 	controller.taskSetupDialog();
 	controller.openTask();
+	controller.completeTask();
 }
