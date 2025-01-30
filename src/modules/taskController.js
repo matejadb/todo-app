@@ -8,7 +8,7 @@ export function taskController() {
 	// Helper Functions
 	//===========================================================
 	// Task Maker
-	const renderTask = () => {
+	const renderTask = (priority) => {
 		const taskItem = document.createElement('li');
 		taskItem.classList.add('task-item');
 		taskItem.dataset.index = Task.tasks.length - 1;
@@ -23,7 +23,7 @@ export function taskController() {
 		dueDate.textContent = document.getElementById('due-date').value;
 		dueDate.classList.add('prevent-select');
 
-		switch (document.querySelector('input[name="priority"]:checked').value) {
+		switch (priority) {
 			case 'Low':
 				taskItem.classList.add('low');
 				break;
@@ -56,18 +56,29 @@ export function taskController() {
 	};
 
 	function submitTaskInfo(e) {
-		const taskForm = document.getElementById('task-form');
 		e.preventDefault();
 
+		const taskForm = document.getElementById('task-form');
+		const titleInput = document.getElementById('title');
+		const descriptionInput = document.getElementById('description');
+		const dueDateInput = document.getElementById('due-date');
+		const priorityInput = document.querySelector(
+			'input[name="priority"]:checked'
+		);
+
+		if (!titleInput.value || !dueDateInput.value) return;
+
+		const priority = priorityInput ? priorityInput.value : 'Low';
+
 		const newTask = new Task(
-			document.getElementById('title').value,
-			document.getElementById('description').value,
-			document.getElementById('due-date').value,
-			document.querySelector('input[name="priority"]:checked').value
+			titleInput.value,
+			descriptionInput.value,
+			dueDateInput.value,
+			priority
 		);
 		Task.tasks.push(newTask);
 
-		renderTask();
+		renderTask(priority);
 
 		taskForm.reset();
 		taskDialog.close();
