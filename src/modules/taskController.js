@@ -134,6 +134,23 @@ export function taskController() {
 		}
 	}
 
+	// Task Deletion
+	function markDelete(e) {
+		if (e.target.classList.contains('trash-icon')) {
+			const deletedTask = e.target.closest('.task-item');
+			const taskIndex = deletedTask.dataset.index;
+
+			Task.tasks.splice(taskIndex, 1);
+			taskList.removeChild(deletedTask);
+
+			Array.from(document.querySelectorAll('.task-item')).forEach(
+				(task, index) => {
+					task.dataset.index = index;
+				}
+			);
+		}
+	}
+
 	//===========================================================
 	// Init Variables
 	//===========================================================
@@ -165,13 +182,22 @@ export function taskController() {
 		taskList.addEventListener('click', printTaskInfo);
 	};
 
+	const taskInteractEventListener = () => {
+		openTask();
+		completeTask();
+		deleteTask();
+	};
+
 	const completeTask = () => {
 		taskList.addEventListener('click', markComplete);
 	};
 
+	const deleteTask = () => {
+		taskList.addEventListener('click', markDelete);
+	};
+
 	return {
 		taskSetupDialog,
-		openTask,
-		completeTask,
+		taskInteractEventListener,
 	};
 }
