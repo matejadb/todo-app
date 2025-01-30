@@ -120,7 +120,7 @@ h1 a {
 }
 
 .dialog-container span {
-	margin-right: 5px;
+	margin-right: 10px;
 	align-self: flex-end;
 }
 
@@ -261,5 +261,5 @@ main {
 
 .information-container span {
 	align-self: flex-end;
-	margin-right: 5px;
+	margin-right: 10px;
 }

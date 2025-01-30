@@ -1,117 +1,140 @@
 import { Task } from './task';
 
 export function taskController() {
+	//===========================================================
+	// Helper Functions
+	//===========================================================
+	// Task Maker
+	const renderTask = () => {
+		const taskItem = document.createElement('li');
+		taskItem.classList.add('task-item');
+		taskItem.dataset.index = Task.tasks.length - 1;
+
+		const title = document.createElement('h1');
+		title.classList.add('prevent-select');
+		title.textContent = document.getElementById('title').value;
+
+		const dueDate = document.createElement('p');
+		dueDate.textContent = document.getElementById('due-date').value;
+		dueDate.classList.add('prevent-select');
+
+		switch (document.querySelector('input[name="priority"]:checked').value) {
+			case 'Low':
+				taskItem.classList.add('low');
+				break;
+			case 'Medium':
+				taskItem.classList.add('medium');
+				break;
+			case 'High':
+				taskItem.classList.add('high');
+				break;
+		}
+
+		taskItem.append(title, dueDate);
+
+		taskList.appendChild(taskItem);
+	};
+
+	function submitTaskInfo(e) {
+		const taskForm = document.getElementById('task-form');
+		e.preventDefault();
+
+		const newTask = new Task(
+			document.getElementById('title').value,
+			document.getElementById('description').value,
+			document.getElementById('due-date').value,
+			document.querySelector('input[name="priority"]:checked').value
+		);
+		Task.tasks.push(newTask);
+
+		renderTask();
+
+		taskForm.reset();
+		taskDialog.close();
+	}
+
+	// Task Information Card
+	const showInfoCard = () => {
+		const modal = document.getElementById('information');
+		const close = document.querySelector('.close-modal');
+
+		modal.style.display = 'block';
+
+		close.addEventListener('click', function () {
+			modal.style.display = 'none';
+			taskContent.textContent = '';
+		});
+
+		window.addEventListener(
+			'click',
+			function (e) {
+				if (e.target === modal) {
+					modal.style.display = 'none';
+					taskContent.textContent = '';
+				}
+			},
+			{ once: true }
+		);
+	};
+
+	function printTaskInfo(e) {
+		const taskToOpen = e.target.closest('.task-item');
+
+		if (!taskToOpen) return;
+
+		const taskIndex = taskToOpen.dataset.index;
+		let task = Task.tasks[taskIndex];
+
+		const title = document.createElement('h1');
+		title.textContent = `${task.title}`;
+
+		const description = document.createElement('p');
+		description.textContent = `Description: ${task.description}`;
+
+		const dueDate = document.createElement('p');
+		dueDate.textContent = `Due: ${task.dueDate}`;
+
+		const priority = document.createElement('p');
+		priority.textContent = `Priority: ${task.priority}`;
+
+		taskContent.append(title, description, dueDate, priority);
+
+		showInfoCard();
+	}
+
+	//===========================================================
+	// Init Variables
+	//===========================================================
 	const taskDialog = document.getElementById('add-task');
 	const taskList = document.querySelector('.task-list');
+	const taskContent = document.querySelector('.task-content');
 
-	const showAddTaskWindow = () => {
+	//===========================================================
+	// Main
+	//===========================================================
+	const addTaskEventListener = () => {
+		document
+			.querySelector('.submit-task')
+			.addEventListener('click', submitTaskInfo);
+	};
+
+	const taskSetupDialog = () => {
 		const showButton = document.querySelector('.task-window');
 		const closeButton = document.querySelector('.close');
 
-		showButton.addEventListener('click', function () {
-			taskDialog.showModal();
-		});
+		showButton.addEventListener('click', () => taskDialog.showModal());
 
-		closeButton.addEventListener('click', function () {
-			taskDialog.close();
-		});
+		closeButton.addEventListener('click', () => taskDialog.close());
 
-		makeTask();
-	};
-
-	const makeTask = () => {
-		const confirmButton = document.querySelector('.submit-task');
-		const taskForm = document.getElementById('task-form');
-
-		confirmButton.addEventListener('click', function (e) {
-			e.preventDefault();
-
-			const newTask = new Task(
-				document.getElementById('title').value,
-				document.getElementById('description').value,
-				document.getElementById('due-date').value,
-				document.querySelector('input[name="priority"]:checked').value
-			);
-			Task.tasks.push(newTask);
-
-			const taskItem = document.createElement('li');
-			taskItem.classList.add('task-item');
-			taskItem.dataset.index = Task.tasks.length - 1;
-
-			const title = document.createElement('h1');
-			title.classList.add('prevent-select');
-			title.textContent = document.getElementById('title').value;
-			taskItem.appendChild(title);
-
-			const dueDate = document.createElement('p');
-			dueDate.textContent = document.getElementById('due-date').value;
-			dueDate.classList.add('prevent-select');
-			taskItem.appendChild(dueDate);
-
-			switch (document.querySelector('input[name="priority"]:checked').value) {
-				case 'Low':
-					taskItem.classList.add('low');
-					break;
-				case 'Medium':
-					taskItem.classList.add('medium');
-					break;
-				case 'High':
-					taskItem.classList.add('high');
-					break;
-			}
-
-			taskList.appendChild(taskItem);
-
-			taskForm.reset();
-			taskDialog.close();
-		});
+		addTaskEventListener();
 	};
 
 	const openTask = () => {
-		const modal = document.getElementById('information');
-		const close = document.querySelector('.close-modal');
-		const taskContent = document.querySelector('.task-content');
-		taskList.addEventListener('click', function (e) {
-			const taskToOpen = e.target.closest('.task-item');
-			if (taskToOpen) {
-				const taskIndex = taskToOpen.dataset.index;
-				let task = Task.tasks[taskIndex];
-
-				const title = document.createElement('h1');
-				title.textContent = `${task.title}`;
-				taskContent.appendChild(title);
-
-				const description = document.createElement('p');
-				description.textContent = `Description: ${task.description}`;
-				taskContent.appendChild(description);
-
-				const dueDate = document.createElement('p');
-				dueDate.textContent = `Due: ${task.dueDate}`;
-				taskContent.appendChild(dueDate);
-
-				const priority = document.createElement('p');
-				priority.textContent = `Priority: ${task.priority}`;
-				taskContent.appendChild(priority);
-
-				modal.style.display = 'block';
-
-				close.addEventListener('click', function () {
-					modal.style.display = 'none';
-					taskContent.textContent = '';
-				});
-
-				window.addEventListener('click', function (e) {
-					if (e.target === modal) {
-						modal.style.display = 'none';
-						taskContent.textContent = '';
-					}
-				});
-			}
-		});
+		taskList.addEventListener('click', printTaskInfo);
 	};
 
 	return {
-		showAddTaskWindow,
+		taskSetupDialog,
 		openTask,
 	};
 }
