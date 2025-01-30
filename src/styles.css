@@ -81,11 +81,20 @@ h1 a {
 #add-task {
 	margin: 10% auto;
 	border-radius: 20px;
-	height: 450px;
-	width: 300px;
+	height: 500px;
+	width: 350px;
 	background-color: #1e1e1e;
 	color: #ededed;
 	border: 1px solid #272727;
+}
+
+#description {
+	width: 220px;
+	height: 120px;
+}
+
+#description:focus {
+	outline: none;
 }
 
 .close,
@@ -127,7 +136,7 @@ input[type='radio'] {
 	padding: 10px 20px;
 	border-radius: 8px;
 	cursor: pointer;
-	margin-top: 30%;
+	margin-top: 15%;
 }
 
 .dialog-container input[type='submit']:hover {
@@ -220,7 +229,6 @@ main {
 	top: 0;
 	width: 100%;
 	height: 100%;
-	overflow: auto;
 	background-color: rgba(0, 0, 0, 0.8);
 	color: #ededed;
 }
@@ -234,11 +242,21 @@ main {
 	border-radius: 20px;
 	-webkit-box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.44);
 	box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.44);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
 	background-color: #1e1e1e;
 	color: #ededed;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
+	display: flex;
+	flex-direction: column;
+}
+
+.task-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 10px;
+	margin: 15px;
 }
 
 .information-container span {
