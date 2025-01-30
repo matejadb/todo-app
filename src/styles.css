@@ -81,7 +81,7 @@ h1 a {
 #add-task {
 	margin: 10% auto;
 	border-radius: 20px;
-	height: 500px;
+	height: 510px;
 	width: 350px;
 	background-color: #1e1e1e;
 	color: #ededed;
@@ -116,6 +116,14 @@ h1 a {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+
+.dialog-container p {
+	color: #ededed;
+	background-color: #1e1e1e;
+	border: 1px solid #272727;
+	border-radius: 5px;
+	padding: 5px;
 }
 
 .dialog-container div {
