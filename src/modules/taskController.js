@@ -1,5 +1,8 @@
 import { Task } from './task';
 
+import checkIcon from '../icons/check.svg';
+import trashIcon from '../icons/trash.svg';
+
 export function taskController() {
 	//===========================================================
 	// Helper Functions
@@ -9,6 +12,8 @@ export function taskController() {
 		const taskItem = document.createElement('li');
 		taskItem.classList.add('task-item');
 		taskItem.dataset.index = Task.tasks.length - 1;
+
+		const infoDiv = document.createElement('div');
 
 		const title = document.createElement('h1');
 		title.classList.add('prevent-select');
@@ -30,7 +35,22 @@ export function taskController() {
 				break;
 		}
 
-		taskItem.append(title, dueDate);
+		infoDiv.append(title, dueDate);
+
+		const iconDiv = document.createElement('div');
+		iconDiv.classList.add('icons');
+		
+		const check = document.createElement('img');
+		check.classList.add('check-icon');
+		check.src = checkIcon;
+
+		const trash = document.createElement('img');
+		trash.classList.add('trash-icon');
+		trash.src = trashIcon;
+
+		iconDiv.append(check, trash);
+
+		taskItem.append(infoDiv, iconDiv);
 
 		taskList.appendChild(taskItem);
 	};
