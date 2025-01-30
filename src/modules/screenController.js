@@ -35,6 +35,5 @@ export function screenController() {
 
 	const controller = taskController();
 
-	controller.taskSetupDialog();
 	controller.taskInteractEventListener();
 }

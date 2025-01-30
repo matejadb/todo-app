@@ -194,6 +194,7 @@ export function taskController() {
 	};
 
 	const taskInteractEventListener = () => {
+		taskSetupDialog();
 		openTask();
 		completeTask();
 		deleteTask();
@@ -208,7 +209,6 @@ export function taskController() {
 	};
 
 	return {
-		taskSetupDialog,
 		taskInteractEventListener,
 	};
 }
