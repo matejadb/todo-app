@@ -3,6 +3,9 @@
 //===========================================================
 import { Task } from './task';
 import { format } from 'date-fns';
+
+import { projectController } from './projectController';
+
 import checkIcon from '../icons/check.svg';
 import trashIcon from '../icons/trash.svg';
 
@@ -86,6 +89,7 @@ export function taskController() {
 		const priorityInput = document.querySelector(
 			'input[name="priority"]:checked'
 		);
+		const projectInput = document.getElementById('project');
 
 		if (!titleInput.value || !dueDateInput.value) return;
 
@@ -95,17 +99,16 @@ export function taskController() {
 			titleInput.value,
 			descriptionInput.value,
 			dueDateInput.value,
-			priority
+			priority,
+			projectInput.value
 		);
 		Task.tasks.push(newTask);
 
 		taskSort();
-
+		projectController().filterTasksByProject(projectInput.value);
 		taskForm.reset();
 		taskDialog.close();
 	}
-
-	// Task Information Card
 
 	const showInfoCard = () => {
 		const modal = document.getElementById('information');
@@ -239,5 +242,6 @@ export function taskController() {
 
 	return {
 		taskInteractEventListener,
+		renderTask,
 	};
 }

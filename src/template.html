@@ -37,6 +37,13 @@
 							<label class="prevent-select" for="high">High</label>
 
 							<div>
+								<label for="project">Project:</label>
+								<select id="project" name="project">
+									<option value="default">All Tasks</option>
+								</select>
+							</div>
+
+							<div>
 								<input type="submit" value="Submit" class="submit-task" />
 							</div>
 						</form>
@@ -52,7 +59,8 @@
 				<ul class="project-list prevent-select">
 					<li id="default-project" class="project-item">All Tasks</li>
 				</ul>
-				<button>Add project</button>
+				<input type="text" id="new-project" placeholder="New project name" />
+				<button id="add-project">Add project</button>
 			</div>
 			<div class="task-container">
 				<h2 id="project-name">All Tasks</h2>

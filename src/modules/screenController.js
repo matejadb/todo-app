@@ -1,4 +1,5 @@
 import { taskController } from './taskController';
+import { projectController } from './projectController';
 
 export function screenController() {
 	/* const projects = [];
@@ -33,7 +34,9 @@ export function screenController() {
 		console.log(Task.tasks);
 	}; */
 
-	const controller = taskController();
+	const controllerTask = taskController();
+	const controllerProject = projectController();
 
-	controller.taskInteractEventListener();
+	controllerTask.taskInteractEventListener();
+	controllerProject.projectEventListener();
 }
