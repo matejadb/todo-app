@@ -84,10 +84,7 @@ export function taskController() {
 		);
 		Task.tasks.push(newTask);
 
-		taskSort();
-
-		taskList.textContent = '';
-		Task.tasks.forEach((task) => renderTask(task.priority));
+		renderTask(priority);
 
 		taskForm.reset();
 		taskDialog.close();
@@ -177,19 +174,6 @@ export function taskController() {
 			);
 		}
 	}
-
-	// Sort Tasks
-	const taskSort = () => {
-		const priorityMap = {
-			Low: 1,
-			Medium: 2,
-			High: 3,
-		};
-
-		Task.tasks.sort((a, b) => {
-			return priorityMap[b.priority] - priorityMap[a.priority];
-		});
-	};
 
 	//===========================================================
 	// Init Variables
