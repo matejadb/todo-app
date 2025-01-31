@@ -10,6 +10,24 @@ export function taskController() {
 	//===========================================================
 	// Helper Functions
 	//===========================================================
+	// Dialog Setup
+	const addTaskEventListener = () => {
+		document
+			.querySelector('.submit-task')
+			.addEventListener('click', submitTaskInfo);
+	};
+
+	const taskSetupDialog = () => {
+		const showButton = document.querySelector('.task-window');
+		const closeButton = document.querySelector('.close');
+
+		showButton.addEventListener('click', () => taskDialog.showModal());
+
+		closeButton.addEventListener('click', () => taskDialog.close());
+
+		addTaskEventListener();
+	};
+
 	// Task Maker
 	const renderTask = (task, index) => {
 		const taskItem = document.createElement('li');
@@ -88,6 +106,7 @@ export function taskController() {
 	}
 
 	// Task Information Card
+
 	const showInfoCard = () => {
 		const modal = document.getElementById('information');
 		const close = document.querySelector('.close-modal');
@@ -145,6 +164,10 @@ export function taskController() {
 		}
 	}
 
+	const openTask = () => {
+		taskList.addEventListener('click', printTaskInfo);
+	};
+
 	// Task Completion
 	function markComplete(e) {
 		if (e.target.classList.contains('check-icon')) {
@@ -154,6 +177,10 @@ export function taskController() {
 			completedTask.classList.toggle('completed');
 		}
 	}
+
+	const completeTask = () => {
+		taskList.addEventListener('click', markComplete);
+	};
 
 	// Task Deletion
 	function markDelete(e) {
@@ -171,6 +198,10 @@ export function taskController() {
 			);
 		}
 	}
+
+	const deleteTask = () => {
+		taskList.addEventListener('click', markDelete);
+	};
 
 	// Sort Tasks
 	const taskSort = () => {
@@ -198,40 +229,12 @@ export function taskController() {
 	//===========================================================
 	// Main
 	//===========================================================
-	const addTaskEventListener = () => {
-		document
-			.querySelector('.submit-task')
-			.addEventListener('click', submitTaskInfo);
-	};
-
-	const taskSetupDialog = () => {
-		const showButton = document.querySelector('.task-window');
-		const closeButton = document.querySelector('.close');
-
-		showButton.addEventListener('click', () => taskDialog.showModal());
-
-		closeButton.addEventListener('click', () => taskDialog.close());
-
-		addTaskEventListener();
-	};
-
-	const openTask = () => {
-		taskList.addEventListener('click', printTaskInfo);
-	};
 
 	const taskInteractEventListener = () => {
 		taskSetupDialog();
 		openTask();
 		completeTask();
 		deleteTask();
-	};
-
-	const completeTask = () => {
-		taskList.addEventListener('click', markComplete);
-	};
-
-	const deleteTask = () => {
-		taskList.addEventListener('click', markDelete);
 	};
 
 	return {
