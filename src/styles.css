@@ -162,6 +162,23 @@ input[type='radio']:checked {
 	background-color: #e64a19;
 }
 
+select {
+	background-color: #1e1e1e;
+	color: #fff;
+	border: none;
+	border: 1px solid #272727;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+select:focus {
+	outline: 1px solid #ff5722;
+}
+
+option {
+	outline: 1px solid #ff5722;
+}
+
 /*================================================*/
 /* Main Section */
 /*================================================*/
@@ -197,6 +214,12 @@ main {
 
 .project-item:hover {
 	cursor: pointer;
+}
+
+#new-project {
+	width: 100%;
+	margin-bottom: 10px;
+	padding: 10px;
 }
 
 /*================================================*/

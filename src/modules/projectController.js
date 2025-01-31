@@ -58,7 +58,12 @@ export function projectController() {
 
 	// Filter Tasks by Project
 	const filterTasksByProject = (project) => {
-		const filteredTasks = Task.tasks.filter((task) => task.project === project);
+		let filteredTasks;
+		if (project === 'All Tasks') {
+			filteredTasks = Task.tasks; // Show all tasks
+		} else {
+			filteredTasks = Task.tasks.filter((task) => task.project === project);
+		}
 		displayTasks(filteredTasks);
 	};
 
