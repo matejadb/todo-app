@@ -11,25 +11,22 @@ export function taskController() {
 	// Helper Functions
 	//===========================================================
 	// Task Maker
-	const renderTask = (priority) => {
+	const renderTask = (task, index) => {
 		const taskItem = document.createElement('li');
 		taskItem.classList.add('task-item');
-		taskItem.dataset.index = Task.tasks.length - 1;
+		taskItem.dataset.index = index;
 
 		const infoDiv = document.createElement('div');
 
 		const title = document.createElement('h1');
 		title.classList.add('prevent-select');
-		title.textContent = document.getElementById('title').value;
+		title.textContent = task.title;
 
 		const dueDate = document.createElement('p');
-		dueDate.textContent = format(
-			Date.parse(document.getElementById('due-date').value),
-			'dd.MM.yyyy'
-		);
+		dueDate.textContent = format(Date.parse(task.dueDate), 'dd.MM.yyyy');
 		dueDate.classList.add('prevent-select');
 
-		switch (priority) {
+		switch (task.priority) {
 			case 'Low':
 				taskItem.classList.add('low');
 				break;
@@ -85,9 +82,6 @@ export function taskController() {
 		Task.tasks.push(newTask);
 
 		taskSort();
-
-		taskList.textContent = '';
-		Task.tasks.forEach((task) => renderTask(task.priority));
 
 		taskForm.reset();
 		taskDialog.close();
@@ -189,6 +183,9 @@ export function taskController() {
 		Task.tasks.sort((a, b) => {
 			return priorityMap[b.priority] - priorityMap[a.priority];
 		});
+
+		taskList.textContent = '';
+		Task.tasks.forEach((task, index) => renderTask(task, index));
 	};
 
 	//===========================================================
