@@ -183,6 +183,9 @@ export function taskController() {
 		Task.tasks.sort((a, b) => {
 			return priorityMap[b.priority] - priorityMap[a.priority];
 		});
+
+		taskList.textContent = '';
+		Task.tasks.forEach((task, index) => renderTask(task, index));
 	};
 
 	//===========================================================
