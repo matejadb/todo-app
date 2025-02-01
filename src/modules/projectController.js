@@ -3,11 +3,35 @@
 //===========================================================
 import { Task } from './task';
 import { taskController } from './taskController';
+import { storage } from './storage';
 
 export function projectController() {
 	//===========================================================
 	// Helper Functions
 	//===========================================================
+	// Project local storage
+	const saveData = () => {
+		localStorage.setItem('projects', JSON.stringify(projects));
+	};
+
+	const loadData = () => {
+		const projectData = JSON.parse(localStorage.getItem('projects'));
+
+		if (projectData) {
+			projects.splice(0, projects.length, ...projectData);
+			const projectList = document.querySelector('.project-list');
+			projectList.textContent = '';
+			Array.from(projectData).forEach((project) => {
+				const projectItem = document.createElement('li');
+				projectItem.classList.add('project-item');
+				projectItem.textContent = project;
+				projectList.appendChild(projectItem);
+			});
+
+			updateProjectDropdown();
+		}
+	};
+
 	const addProjectEventListener = () => {
 		const addProjectButton = document.getElementById('add-project');
 		addProjectButton.addEventListener('click', () => {
@@ -17,6 +41,8 @@ export function projectController() {
 				updateProjectList();
 				updateProjectDropdown();
 				projectInput.value = '';
+				saveData();
+				console.log(window.localStorage);
 			}
 		});
 	};
@@ -34,13 +60,14 @@ export function projectController() {
 
 	const updateProjectList = () => {
 		const projectList = document.querySelector('.project-list');
-		projectList.textContent = ''; // Clear the existing list
+		projectList.textContent = '';
 		projects.forEach((project) => {
 			const projectItem = document.createElement('li');
 			projectItem.classList.add('project-item');
 			projectItem.textContent = project;
 			projectList.appendChild(projectItem);
 		});
+		saveData();
 	};
 
 	const setActiveProject = () => {
@@ -75,16 +102,18 @@ export function projectController() {
 	//===========================================================
 	const projects = ['All Tasks'];
 	const taskList = document.querySelector('.task-list');
-
+	const storageController = storage();
 	//===========================================================
 	// Main
 	//===========================================================
 	const projectEventListener = () => {
 		addProjectEventListener();
 		setActiveProject();
+		loadData();
 	};
 	return {
 		projectEventListener,
 		filterTasksByProject,
+		projects,
 	};
 }
