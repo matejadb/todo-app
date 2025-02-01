@@ -13,6 +13,22 @@ export function taskController() {
 	//===========================================================
 	// Helper Functions
 	//===========================================================
+	// Task Local Storage
+	const saveData = () => {
+		localStorage.setItem('tasks', JSON.stringify(Task.tasks));
+	};
+
+	const loadData = () => {
+		const taskData = JSON.parse(localStorage.getItem('tasks'));
+
+		if (taskData) {
+			Task.tasks.splice(0, Task.tasks.length, ...taskData);
+			Array.from(taskData).forEach((task, index) => {
+				renderTask(task, index);
+			});
+		}
+	};
+
 	// Dialog Setup
 	const addTaskEventListener = () => {
 		document
@@ -106,6 +122,7 @@ export function taskController() {
 
 		taskSort();
 		projectController().filterTasksByProject(projectInput.value);
+		saveData();
 		taskForm.reset();
 		taskDialog.close();
 	}
@@ -179,6 +196,7 @@ export function taskController() {
 			Task.tasks[taskIndex].markComplete();
 			completedTask.classList.toggle('completed');
 		}
+		saveData();
 	}
 
 	const completeTask = () => {
@@ -200,6 +218,7 @@ export function taskController() {
 				}
 			);
 		}
+		saveData();
 	}
 
 	const deleteTask = () => {
@@ -238,6 +257,7 @@ export function taskController() {
 		openTask();
 		completeTask();
 		deleteTask();
+		loadData();
 	};
 
 	return {

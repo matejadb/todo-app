@@ -8,7 +8,7 @@ export function projectController() {
 	//===========================================================
 	// Helper Functions
 	//===========================================================
-	// Project local storage
+	// Project Local Storage
 	const saveData = () => {
 		localStorage.setItem('projects', JSON.stringify(projects));
 	};
