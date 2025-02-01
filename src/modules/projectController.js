@@ -1,11 +1,13 @@
+//===========================================================
+// Imports
+//===========================================================
 import { Task } from './task';
 import { taskController } from './taskController';
 
 export function projectController() {
-	const projects = ['All Tasks'];
-	const taskList = document.querySelector('.task-list');
-
-	// Add Project
+	//===========================================================
+	// Helper Functions
+	//===========================================================
 	const addProjectEventListener = () => {
 		const addProjectButton = document.getElementById('add-project');
 		addProjectButton.addEventListener('click', () => {
@@ -14,12 +16,11 @@ export function projectController() {
 				projects.push(projectInput.value);
 				updateProjectList();
 				updateProjectDropdown();
-				projectInput.value = ''; // Clear the input field
+				projectInput.value = '';
 			}
 		});
 	};
 
-	// Populate Dropdown Menu
 	function updateProjectDropdown() {
 		const projectDropdown = document.getElementById('project');
 		projectDropdown.textContent = '';
@@ -31,7 +32,6 @@ export function projectController() {
 		});
 	}
 
-	// Update Project List
 	const updateProjectList = () => {
 		const projectList = document.querySelector('.project-list');
 		projectList.textContent = ''; // Clear the existing list
@@ -43,7 +43,6 @@ export function projectController() {
 		});
 	};
 
-	// Set Active Project
 	const setActiveProject = () => {
 		const projectList = document.querySelector('.project-list');
 		const currentProject = document.getElementById('project-name');
@@ -56,7 +55,6 @@ export function projectController() {
 		});
 	};
 
-	// Filter Tasks by Project
 	const filterTasksByProject = (project) => {
 		let filteredTasks;
 		if (project === 'All Tasks') {
@@ -67,18 +65,24 @@ export function projectController() {
 		displayTasks(filteredTasks);
 	};
 
-	// Display Tasks
 	const displayTasks = (tasks) => {
-		taskList.textContent = ''; // Clear the task list
-		tasks.forEach((task, index) => taskController().renderTask(task, index)); // Render the filtered tasks
+		taskList.textContent = '';
+		tasks.forEach((task, index) => taskController().renderTask(task, index));
 	};
 
-	// Add Project Event Listener
+	//===========================================================
+	// Init Variables
+	//===========================================================
+	const projects = ['All Tasks'];
+	const taskList = document.querySelector('.task-list');
+
+	//===========================================================
+	// Main
+	//===========================================================
 	const projectEventListener = () => {
 		addProjectEventListener();
 		setActiveProject();
 	};
-
 	return {
 		projectEventListener,
 		filterTasksByProject,
