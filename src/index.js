@@ -4,7 +4,7 @@ import { screenController } from './modules/screenController';
 screenController();
 
 //===========================================================
-// Next day goals (01.01.2025)
+// Goals
 //===========================================================
-// 1) Fix tasks appearing on wrong project tabs until project switch
 // 2) Go over projects code
+// 3) Local storage
