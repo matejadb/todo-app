@@ -20,11 +20,11 @@ export function taskController() {
 
 	const loadData = () => {
 		const taskData = JSON.parse(localStorage.getItem('tasks'));
-
 		if (taskData) {
-			Task.tasks.splice(0, Task.tasks.length, ...taskData);
-			Array.from(taskData).forEach((task, index) => {
+			Task.tasks.splice(0, Task.tasks.length, ...taskData.map(Task.fromJSON));
+			Task.tasks.forEach((task, index) => {
 				renderTask(task, index);
+				//Task.tasks[index].isCompleted = task.isCompleted;
 			});
 		}
 	};
@@ -52,6 +52,10 @@ export function taskController() {
 		const taskItem = document.createElement('li');
 		taskItem.classList.add('task-item');
 		taskItem.dataset.index = index;
+
+		if (task.isCompleted) {
+			taskItem.classList.add('completed');
+		}
 
 		const infoDiv = document.createElement('div');
 
@@ -170,7 +174,7 @@ export function taskController() {
 
 			const dueDate = document.createElement('p');
 
-			dueDate.textContent = dueDate.textContent = `Due: ${format(
+			dueDate.textContent = `Due: ${format(
 				Date.parse(task.dueDate),
 				'dd.MM.yyyy'
 			)}`;

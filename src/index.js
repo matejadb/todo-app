@@ -7,4 +7,4 @@ screenController();
 // Goals
 //===========================================================
 // 2) Go over projects code
-// 3) Local storage
+// 3) Add option to delete projects
