@@ -3,7 +3,6 @@
 //===========================================================
 import { Task } from './task';
 import { taskController } from './taskController';
-import { storage } from './storage';
 
 export function projectController() {
 	//===========================================================
@@ -102,7 +101,6 @@ export function projectController() {
 	//===========================================================
 	const projects = ['All Tasks'];
 	const taskList = document.querySelector('.task-list');
-	const storageController = storage();
 	//===========================================================
 	// Main
 	//===========================================================
