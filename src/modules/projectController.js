@@ -31,6 +31,7 @@ export function projectController() {
 					const trash = document.createElement('img');
 					trash.src = trashIcon;
 					trash.classList.add('trash-icon');
+					trash.classList.add('hidden');
 					projectItem.appendChild(trash);
 				}
 
@@ -117,7 +118,23 @@ export function projectController() {
 		tasks.forEach((task, index) => taskController().renderTask(task, index));
 	};
 
-	const showDeleteButton = () => {};
+	const showDeleteButton = () => {
+		/* const projectItem = document.querySelectorAll('.project-item');
+
+		projectItem.forEach((project) => {
+			const deleteButton = document.querySelector('.trash-icon');
+
+			project.addEventListener('mouseover', function () {
+				deleteButton.classList.toggle('hidden');
+			});
+
+			project.addEventListener('mouseout', function () {
+				deleteButton.classList.toggle('hidden');
+			});
+		}); */
+
+		deleteProject();
+	};
 
 	const deleteProject = () => {
 		const projectList = document.querySelector('.project-list');
@@ -145,7 +162,7 @@ export function projectController() {
 		addProjectEventListener();
 		setActiveProject();
 		loadData();
-		deleteProject();
+		showDeleteButton();
 	};
 	return {
 		projectEventListener,
