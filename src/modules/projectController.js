@@ -19,7 +19,7 @@ export function projectController() {
 
 		if (projectData) {
 			projects.splice(0, projects.length, ...projectData);
-			const projectList = document.querySelector('.project-list');
+
 			projectList.textContent = '';
 			Array.from(projectData).forEach((project) => {
 				const projectItem = document.createElement('li');
@@ -53,7 +53,6 @@ export function projectController() {
 				updateProjectDropdown();
 				projectInput.value = '';
 				saveData();
-				console.log(window.localStorage);
 			}
 		});
 	};
@@ -70,7 +69,6 @@ export function projectController() {
 	}
 
 	const updateProjectList = () => {
-		const projectList = document.querySelector('.project-list');
 		projectList.textContent = '';
 		projects.forEach((project) => {
 			const projectItem = document.createElement('li');
@@ -92,7 +90,6 @@ export function projectController() {
 	};
 
 	const setActiveProject = () => {
-		const projectList = document.querySelector('.project-list');
 		const currentProject = document.getElementById('project-name');
 		projectList.addEventListener('click', (e) => {
 			if (e.target.classList.contains('project-item')) {
@@ -119,25 +116,26 @@ export function projectController() {
 	};
 
 	const showDeleteButton = () => {
-		/* const projectItem = document.querySelectorAll('.project-item');
+		const projectList = document.querySelector('.project-list');
 
-		projectItem.forEach((project) => {
-			const deleteButton = document.querySelector('.trash-icon');
-
-			project.addEventListener('mouseover', function () {
-				deleteButton.classList.toggle('hidden');
-			});
-
-			project.addEventListener('mouseout', function () {
-				deleteButton.classList.toggle('hidden');
-			});
-		}); */
-
+		projectList.addEventListener('mouseover', function (e) {
+			const projectItem = e.target.closest('.project-item');
+			if (projectItem) {
+				const deleteButton = projectItem.querySelector('.trash-icon');
+				if (deleteButton) deleteButton.classList.remove('hidden');
+			}
+		});
+		projectList.addEventListener('mouseout', function (e) {
+			const projectItem = e.target.closest('.project-item');
+			if (projectItem) {
+				const deleteButton = projectItem.querySelector('.trash-icon');
+				if (deleteButton) deleteButton.classList.add('hidden');
+			}
+		});
 		deleteProject();
 	};
 
 	const deleteProject = () => {
-		const projectList = document.querySelector('.project-list');
 		projectList.addEventListener('click', function (e) {
 			if (e.target.classList.contains('trash-icon')) {
 				const deletedTask = e.target.closest('.project-item');
@@ -155,6 +153,8 @@ export function projectController() {
 	//===========================================================
 	const projects = ['All Tasks'];
 	const taskList = document.querySelector('.task-list');
+	const projectList = document.querySelector('.project-list');
+
 	//===========================================================
 	// Main
 	//===========================================================

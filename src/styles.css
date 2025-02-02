@@ -213,9 +213,9 @@ main {
 	transition: background-color 0.3s ease;
 }
 
-/* .hidden {
+.hidden {
 	display: none;
-} */
+}
 
 .project-item:hover {
 	background-color: #272727;

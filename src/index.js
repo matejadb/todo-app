@@ -3,8 +3,9 @@ import { screenController } from './modules/screenController';
 
 screenController();
 
-//===========================================================
+//===================================================================
 // Goals
-//===========================================================
-// 2) Go over projects code
-// 4) Make the delete project item button appear on hover
+//===================================================================
+// 1) Go over projects code
+// 2) When a project is deleted delete all tasks within that project
+// 3) Refactor the code
