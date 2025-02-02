@@ -24,7 +24,6 @@ export function taskController() {
 			Task.tasks.splice(0, Task.tasks.length, ...taskData.map(Task.fromJSON));
 			Task.tasks.forEach((task, index) => {
 				renderTask(task, index);
-				//Task.tasks[index].isCompleted = task.isCompleted;
 			});
 		}
 	};

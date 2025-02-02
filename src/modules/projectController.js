@@ -23,8 +23,17 @@ export function projectController() {
 			projectList.textContent = '';
 			Array.from(projectData).forEach((project) => {
 				const projectItem = document.createElement('li');
+
 				projectItem.classList.add('project-item');
 				projectItem.textContent = project;
+
+				if (project !== 'All Tasks') {
+					const trash = document.createElement('img');
+					trash.src = trashIcon;
+					trash.classList.add('trash-icon');
+					projectItem.appendChild(trash);
+				}
+
 				projectList.appendChild(projectItem);
 			});
 
@@ -65,14 +74,17 @@ export function projectController() {
 		projects.forEach((project) => {
 			const projectItem = document.createElement('li');
 			projectItem.classList.add('project-item');
-
-			const trash = document.createElement('img');
-			trash.src = trashIcon;
-			trash.classList.add('trash-icon');
-			trash.classList.add('hidden');
-
 			projectItem.textContent = project;
-			projectItem.appendChild(trash);
+
+			if (project !== 'All Tasks') {
+				const trash = document.createElement('img');
+				trash.src = trashIcon;
+				trash.classList.add('trash-icon');
+				trash.classList.add('hidden');
+
+				projectItem.appendChild(trash);
+			}
+
 			projectList.appendChild(projectItem);
 		});
 		saveData();
@@ -105,9 +117,19 @@ export function projectController() {
 		tasks.forEach((task, index) => taskController().renderTask(task, index));
 	};
 
+	const showDeleteButton = () => {};
+
 	const deleteProject = () => {
 		const projectList = document.querySelector('.project-list');
-		projectList.addEventListener('click', function (e) {});
+		projectList.addEventListener('click', function (e) {
+			if (e.target.classList.contains('trash-icon')) {
+				const deletedTask = e.target.closest('.project-item');
+				console.log(projects.indexOf(deletedTask.textContent));
+				projects.splice(projects.indexOf(deletedTask.textContent), 1);
+				projectList.removeChild(deletedTask);
+			}
+		});
+		saveData();
 	};
 
 	//===========================================================
@@ -122,6 +144,7 @@ export function projectController() {
 		addProjectEventListener();
 		setActiveProject();
 		loadData();
+		deleteProject();
 	};
 	return {
 		projectEventListener,
