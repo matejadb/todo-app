@@ -124,12 +124,13 @@ export function projectController() {
 		projectList.addEventListener('click', function (e) {
 			if (e.target.classList.contains('trash-icon')) {
 				const deletedTask = e.target.closest('.project-item');
-				console.log(projects.indexOf(deletedTask.textContent));
+
 				projects.splice(projects.indexOf(deletedTask.textContent), 1);
 				projectList.removeChild(deletedTask);
+
+				saveData();
 			}
 		});
-		saveData();
 	};
 
 	//===========================================================
