@@ -4,6 +4,7 @@
 import { Task } from './task';
 import { taskController } from './taskController';
 
+import trashIcon from '../icons/trash.svg';
 export function projectController() {
 	//===========================================================
 	// Helper Functions
@@ -31,6 +32,7 @@ export function projectController() {
 		}
 	};
 
+	// Project Maker
 	const addProjectEventListener = () => {
 		const addProjectButton = document.getElementById('add-project');
 		addProjectButton.addEventListener('click', () => {
@@ -63,7 +65,14 @@ export function projectController() {
 		projects.forEach((project) => {
 			const projectItem = document.createElement('li');
 			projectItem.classList.add('project-item');
+
+			const trash = document.createElement('img');
+			trash.src = trashIcon;
+			trash.classList.add('trash-icon');
+			trash.classList.add('hidden');
+
 			projectItem.textContent = project;
+			projectItem.appendChild(trash);
 			projectList.appendChild(projectItem);
 		});
 		saveData();
@@ -94,6 +103,11 @@ export function projectController() {
 	const displayTasks = (tasks) => {
 		taskList.textContent = '';
 		tasks.forEach((task, index) => taskController().renderTask(task, index));
+	};
+
+	const deleteProject = () => {
+		const projectList = document.querySelector('.project-list');
+		projectList.addEventListener('click', function (e) {});
 	};
 
 	//===========================================================
