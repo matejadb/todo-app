@@ -124,7 +124,7 @@ export function projectController() {
 
 				currentProject.textContent = projects[index - 1];
 				filterTasksByProject(projects[index - 1]);
-
+				updateProjectDropdown();
 				saveData();
 			}
 		});
