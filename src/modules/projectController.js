@@ -135,14 +135,16 @@ export function projectController() {
 		deleteProject();
 	};
 
-	const setAllTasks = () => {};
-
 	const deleteProject = () => {
 		projectList.addEventListener('click', function (e) {
 			if (e.target.classList.contains('trash-icon')) {
 				const deletedProject = e.target.closest('.project-item');
 				projects.splice(projects.indexOf(deletedProject.textContent), 1);
 				projectList.removeChild(deletedProject);
+
+				Task.tasks = Task.tasks.filter(
+					(task) => task.project !== deletedProject.textContent
+				);
 
 				saveData();
 
@@ -151,6 +153,8 @@ export function projectController() {
 					currentProject.textContent = 'All Tasks';
 					filterTasksByProject('All Tasks');
 				}
+
+				console.log(Task.tasks);
 			}
 		});
 	};
