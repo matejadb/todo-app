@@ -21,6 +21,7 @@ export function projectController() {
 			if (projectInput.value && !projects.includes(projectInput.value)) {
 				projects.push(projectInput.value);
 				currentProject.textContent = projectInput.value;
+
 				filterTasksByProject(currentProject.textContent);
 				updateProjectList();
 				updateProjectDropdown();
@@ -56,10 +57,18 @@ export function projectController() {
 
 				projectItem.appendChild(trash);
 			}
-
+			markSelected(projectItem);
 			projectList.appendChild(projectItem);
 		});
 		saveData();
+	};
+
+	const markSelected = (project) => {
+		document
+			.querySelectorAll('.project-item')
+			.forEach((project) => project.classList.remove('active'));
+
+		project.classList.add('active');
 	};
 
 	const setActiveProject = () => {
@@ -67,6 +76,7 @@ export function projectController() {
 		projectList.addEventListener('click', (e) => {
 			if (e.target.classList.contains('project-item')) {
 				const selectedProject = e.target;
+				markSelected(selectedProject);
 				currentProject.textContent = e.target.textContent;
 				filterTasksByProject(selectedProject.textContent);
 			}
@@ -122,8 +132,16 @@ export function projectController() {
 
 				const currentProject = document.getElementById('project-name');
 
-				currentProject.textContent = projects[index - 1];
-				filterTasksByProject(projects[index - 1]);
+				if (currentProject.textContent === deletedProject.textContent) {
+					currentProject.textContent = projects[index - 1];
+					document.querySelectorAll('.project-item').forEach((project) => {
+						if (project.textContent === currentProject.textContent) {
+							markSelected(project);
+							filterTasksByProject(projects[index - 1]);
+						}
+					});
+				}
+				filterTasksByProject(currentProject.textContent);
 				updateProjectDropdown();
 				saveData();
 			}
@@ -150,5 +168,6 @@ export function projectController() {
 		projectEventListener,
 		filterTasksByProject,
 		updateProjectDropdown,
+		markSelected,
 	};
 }

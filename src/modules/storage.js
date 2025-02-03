@@ -45,4 +45,11 @@ export function loadData() {
 
 		projectController().updateProjectDropdown();
 	}
+
+	const allTasksProject = document.querySelector('.project-item');
+	if (allTasksProject) {
+		allTasksProject.classList.add('active');
+		document.getElementById('project-name').textContent = 'All Tasks';
+		projectController().filterTasksByProject('All Tasks');
+	}
 }
