@@ -124,7 +124,10 @@ export function taskController() {
 		Task.tasks.push(newTask);
 
 		taskSort();
-		projectController().filterTasksByProject(projectInput.value);
+
+		const currentProject = document.getElementById('project-name').textContent;
+		projectController().filterTasksByProject(currentProject);
+
 		saveData();
 		taskForm.reset();
 		taskDialog.close();
