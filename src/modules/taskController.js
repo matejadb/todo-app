@@ -249,7 +249,6 @@ export function taskController() {
 		openTask();
 		completeTask();
 		deleteTask();
-		loadData();
 	};
 
 	return {
