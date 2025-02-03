@@ -1,10 +1,4 @@
 import './styles.css';
-import { screenController } from './modules/screenController';
+import { init } from './modules/init';
 
-screenController();
-
-//===================================================================
-// Goals
-//===================================================================
-// 1) Go over projects code
-// 3) Refactor the code
+init();
