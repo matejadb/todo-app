@@ -135,6 +135,8 @@ export function projectController() {
 		deleteProject();
 	};
 
+	const setAllTasks = () => {};
+
 	const deleteProject = () => {
 		projectList.addEventListener('click', function (e) {
 			if (e.target.classList.contains('trash-icon')) {
@@ -143,6 +145,12 @@ export function projectController() {
 				projectList.removeChild(deletedProject);
 
 				saveData();
+
+				const currentProject = document.getElementById('project-name');
+				if (currentProject.textContent === deletedProject.textContent) {
+					currentProject.textContent = 'All Tasks';
+					filterTasksByProject('All Tasks');
+				}
 			}
 		});
 	};
