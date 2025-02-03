@@ -66,9 +66,9 @@ export function projectController() {
 		const currentProject = document.getElementById('project-name');
 		projectList.addEventListener('click', (e) => {
 			if (e.target.classList.contains('project-item')) {
-				const selectedProject = e.target.textContent;
+				const selectedProject = e.target;
 				currentProject.textContent = e.target.textContent;
-				filterTasksByProject(selectedProject);
+				filterTasksByProject(selectedProject.textContent);
 			}
 		});
 	};
