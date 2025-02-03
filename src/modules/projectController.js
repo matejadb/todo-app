@@ -112,7 +112,8 @@ export function projectController() {
 		projectList.addEventListener('click', function (e) {
 			if (e.target.classList.contains('trash-icon')) {
 				const deletedProject = e.target.closest('.project-item');
-				projects.splice(projects.indexOf(deletedProject.textContent), 1);
+				const index = projects.indexOf(deletedProject.textContent);
+				projects.splice(projects.indexOf(index, 1));
 				projectList.removeChild(deletedProject);
 
 				Task.tasks = Task.tasks.filter(
@@ -121,8 +122,8 @@ export function projectController() {
 
 				const currentProject = document.getElementById('project-name');
 
-				currentProject.textContent = 'All Tasks';
-				filterTasksByProject('All Tasks');
+				currentProject.textContent = projects[index - 1];
+				filterTasksByProject(projects[index - 1]);
 
 				saveData();
 			}
