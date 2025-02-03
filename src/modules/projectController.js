@@ -17,8 +17,11 @@ export function projectController() {
 		const addProjectButton = document.getElementById('add-project');
 		addProjectButton.addEventListener('click', () => {
 			const projectInput = document.getElementById('new-project');
+			const currentProject = document.getElementById('project-name');
 			if (projectInput.value && !projects.includes(projectInput.value)) {
 				projects.push(projectInput.value);
+				currentProject.textContent = projectInput.value;
+				filterTasksByProject(currentProject.textContent);
 				updateProjectList();
 				updateProjectDropdown();
 				projectInput.value = '';
