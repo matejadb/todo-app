@@ -4,6 +4,7 @@
 import { Task } from './task';
 import { format } from 'date-fns';
 
+import { saveData, loadData } from './storage';
 import { projectController } from './projectController';
 
 import checkIcon from '../icons/check.svg';
@@ -13,21 +14,6 @@ export function taskController() {
 	//===========================================================
 	// Helper Functions
 	//===========================================================
-	// Task Local Storage
-	const saveData = () => {
-		localStorage.setItem('tasks', JSON.stringify(Task.tasks));
-	};
-
-	const loadData = () => {
-		const taskData = JSON.parse(localStorage.getItem('tasks'));
-		if (taskData) {
-			Task.tasks.splice(0, Task.tasks.length, ...taskData.map(Task.fromJSON));
-			Task.tasks.forEach((task, index) => {
-				renderTask(task, index);
-			});
-		}
-	};
-
 	// Dialog Setup
 	const addTaskEventListener = () => {
 		document

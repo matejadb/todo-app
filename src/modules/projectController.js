@@ -3,45 +3,15 @@
 //===========================================================
 import { Task } from './task';
 import { taskController } from './taskController';
-
+import { saveData, loadData } from './storage';
 import trashIcon from '../icons/trash.svg';
+
+export const projects = ['All Tasks'];
+
 export function projectController() {
 	//===========================================================
 	// Helper Functions
 	//===========================================================
-	// Project Local Storage
-	const saveData = () => {
-		localStorage.setItem('projects', JSON.stringify(projects));
-	};
-
-	const loadData = () => {
-		const projectData = JSON.parse(localStorage.getItem('projects'));
-
-		if (projectData) {
-			projects.splice(0, projects.length, ...projectData);
-
-			projectList.textContent = '';
-			Array.from(projectData).forEach((project) => {
-				const projectItem = document.createElement('li');
-
-				projectItem.classList.add('project-item');
-				projectItem.textContent = project;
-
-				if (project !== 'All Tasks') {
-					const trash = document.createElement('img');
-					trash.src = trashIcon;
-					trash.classList.add('trash-icon');
-					trash.classList.add('hidden');
-					projectItem.appendChild(trash);
-				}
-
-				projectList.appendChild(projectItem);
-			});
-
-			updateProjectDropdown();
-		}
-	};
-
 	// Project Maker
 	const addProjectEventListener = () => {
 		const addProjectButton = document.getElementById('add-project');
@@ -146,15 +116,12 @@ export function projectController() {
 					(task) => task.project !== deletedProject.textContent
 				);
 
-				saveData();
-
 				const currentProject = document.getElementById('project-name');
-				if (currentProject.textContent === deletedProject.textContent) {
-					currentProject.textContent = 'All Tasks';
-					filterTasksByProject('All Tasks');
-				}
 
-				console.log(Task.tasks);
+				currentProject.textContent = 'All Tasks';
+				filterTasksByProject('All Tasks');
+
+				saveData();
 			}
 		});
 	};
@@ -162,7 +129,7 @@ export function projectController() {
 	//===========================================================
 	// Init Variables
 	//===========================================================
-	const projects = ['All Tasks'];
+
 	const taskList = document.querySelector('.task-list');
 	const projectList = document.querySelector('.project-list');
 
@@ -178,6 +145,6 @@ export function projectController() {
 	return {
 		projectEventListener,
 		filterTasksByProject,
-		projects,
+		updateProjectDropdown,
 	};
 }
