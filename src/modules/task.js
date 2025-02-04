@@ -21,6 +21,14 @@ export class Task {
 		this.isCompleted = !this.isCompleted;
 	}
 
+	updateTask(newTitle, newDescription, newDueDate, newPriority, newProject) {
+		this.title = newTitle;
+		this.description = newDescription;
+		this.dueDate = newDueDate;
+		this.priority = newPriority;
+		this.project = newProject;
+	}
+
 	static fromJSON(data) {
 		return new Task(
 			data.title,
