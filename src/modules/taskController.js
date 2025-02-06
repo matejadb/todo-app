@@ -17,8 +17,8 @@ export function taskController() {
 	// Dialog Setup
 	const addTaskEventListener = () => {
 		document
-			.querySelector('.submit-task')
-			.addEventListener('click', submitTaskInfo);
+			.getElementById('task-form')
+			.addEventListener('submit', submitTaskInfo);
 	};
 
 	const taskSetupDialog = () => {
@@ -84,28 +84,10 @@ export function taskController() {
 		taskList.appendChild(taskItem);
 	};
 
-	const checkValidity = (title) => {
-		title.addEventListener('input', (e) => {
-			if (title.value.validity.typeMismatch) {
-				title.setCustomValidity('Enter a task title!');
-			} else {
-				title.setCustomValidity('');
-			}
-		});
-
-		/* 	dueDate.addEventListener('input', (e) => {
-			if (dueDate.value.validity.typeMismatch) {
-				dueDate.setCustomValidity('Enter a due date!');
-			} else {
-				dueDate.setCustomValidity('');
-			}
-		}); */
-	};
-
 	function submitTaskInfo(e) {
 		e.preventDefault();
-
 		const taskForm = document.getElementById('task-form');
+
 		const titleInput = document.getElementById('title');
 		const descriptionInput = document.getElementById('description');
 		const dueDateInput = document.getElementById('due-date');
@@ -113,10 +95,6 @@ export function taskController() {
 			'input[name="priority"]:checked'
 		);
 		const projectInput = document.getElementById('project');
-
-		checkValidity(titleInput);
-
-		/* if (!titleInput.value || !dueDateInput.value) return; */
 
 		const priority = priorityInput ? priorityInput.value : 'Low';
 
