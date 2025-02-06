@@ -84,6 +84,24 @@ export function taskController() {
 		taskList.appendChild(taskItem);
 	};
 
+	const checkValidity = (title) => {
+		title.addEventListener('input', (e) => {
+			if (title.value.validity.typeMismatch) {
+				title.setCustomValidity('Enter a task title!');
+			} else {
+				title.setCustomValidity('');
+			}
+		});
+
+		/* 	dueDate.addEventListener('input', (e) => {
+			if (dueDate.value.validity.typeMismatch) {
+				dueDate.setCustomValidity('Enter a due date!');
+			} else {
+				dueDate.setCustomValidity('');
+			}
+		}); */
+	};
+
 	function submitTaskInfo(e) {
 		e.preventDefault();
 
@@ -96,7 +114,9 @@ export function taskController() {
 		);
 		const projectInput = document.getElementById('project');
 
-		if (!titleInput.value || !dueDateInput.value) return;
+		checkValidity(titleInput);
+
+		/* if (!titleInput.value || !dueDateInput.value) return; */
 
 		const priority = priorityInput ? priorityInput.value : 'Low';
 
